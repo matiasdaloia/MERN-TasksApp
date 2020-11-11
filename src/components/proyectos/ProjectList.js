@@ -1,22 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Project from "./Project";
+import projectContext from "../../context/projects/projectContext";
 
 const ProjectList = () => {
-  const projects = [
-    {
-      name: "Test Project",
-    },
-    {
-      name: "Internet of Things",
-    },
-    {
-      name: "Data Science",
-    },
-    {
-      name: "Javascript OOP",
-    },
-  ];
-
+  const { projects } = useContext(projectContext);
   return (
     <ul>
       {projects.map((project) => (

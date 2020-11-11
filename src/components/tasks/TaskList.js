@@ -16,7 +16,7 @@ const TaskList = () => {
         {tasks.length === 0 ? (
           <p>No tasks available for this Project</p>
         ) : (
-          tasks.map((task) => <Task task={task} />)
+          tasks.map((task) => <Task key={task.name} task={task} />)
         )}
       </ul>
       <button type="button" className="btn btn-eliminar">
