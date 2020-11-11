@@ -1,4 +1,6 @@
 import React from "react";
+import NewProject from "../proyectos/NewProject";
+import ProjectList from "../proyectos/ProjectList";
 
 function Sidebar() {
   return (
@@ -6,8 +8,10 @@ function Sidebar() {
       <h1>
         MERN<span>Tasks</span>
       </h1>
+      <NewProject />
       <div className="proyectos">
-        <h2>Tus Proyectos</h2>
+        <h2>Your Projects</h2>
+        <ProjectList />
       </div>
     </aside>
   );
