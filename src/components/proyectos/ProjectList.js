@@ -11,8 +11,16 @@ const ProjectList = () => {
     getProjects();
   }, []);
 
+  console.log(projects);
+
   //Check if there are any projects, if not return null
-  if (projects.length === 0) return null;
+  if (projects.length === 0)
+    return (
+      <p>
+        There are no projects created. Please begin creating one with above
+        button
+      </p>
+    );
 
   return (
     <ul>
