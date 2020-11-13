@@ -5,7 +5,7 @@ function NewProject() {
   // Get state for form (from context)
   const projectsContext = useContext(projectContext);
 
-  const { form, showForm } = projectsContext;
+  const { form, error, showForm, addProject, showError } = projectsContext;
 
   //state for new project
   const [project, setProject] = useState({
@@ -25,7 +25,20 @@ function NewProject() {
   // Submit form
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitted");
+
+    // Validate project
+
+    if (name === "") {
+      return showError();
+    }
+
+    // Add project to state
+    addProject(project);
+
+    // Restart the form
+    setProject({
+      name: "",
+    });
   };
 
   return (
@@ -57,6 +70,9 @@ function NewProject() {
             value="Add Project"
           />
         </form>
+      ) : null}
+      {error ? (
+        <p className="mensaje error">El nombre del formulario es obligatorio</p>
       ) : null}
     </Fragment>
   );

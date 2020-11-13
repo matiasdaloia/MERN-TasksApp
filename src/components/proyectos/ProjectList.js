@@ -12,12 +12,12 @@ const ProjectList = () => {
   }, []);
 
   //Check if there are any projects, if not return null
-  if (projects === 0) return null;
+  if (projects.length === 0) return null;
 
   return (
     <ul>
       {projects.map((project) => (
-        <Project key={project.id} name={project.name} />
+        <Project key={project.id} name={project.name} project={project} />
       ))}
     </ul>
   );
