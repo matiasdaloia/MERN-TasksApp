@@ -1,10 +1,8 @@
-import { FORM_PROJECT } from "../../types";
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state, action) => {
   // switches on the action type and depending on which one is triggered, we then dispatch the function in projectState
   switch (action.type) {
-    case FORM_PROJECT:
+    case "SHOW_FORM":
       if (state.form === true) {
         return {
           ...state,
@@ -16,6 +14,11 @@ export default (state, action) => {
           form: true,
         };
       }
+    case "GET_PROJECTS":
+      return {
+        ...state,
+        projects: action.payload,
+      };
     default:
       return state;
   }

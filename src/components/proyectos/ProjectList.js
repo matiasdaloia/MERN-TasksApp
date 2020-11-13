@@ -1,13 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Project from "./Project";
 import projectContext from "../../context/projects/projectContext";
 
 const ProjectList = () => {
-  const { projects } = useContext(projectContext);
+  // Extract projects from global context
+  const { projects, getProjects } = useContext(projectContext);
+
+  // Get the projects as soon as the component loads
+  useEffect(() => {
+    getProjects();
+  }, []);
+
+  //Check if there are any projects, if not return null
+  if (projects === 0) return null;
+
   return (
     <ul>
       {projects.map((project) => (
-        <Project key={project.name} name={project.name} />
+        <Project key={project.id} name={project.name} />
       ))}
     </ul>
   );
