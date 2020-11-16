@@ -9,6 +9,22 @@ export default (state, action) => {
           (task) => task.projectId === action.payload
         ),
       };
+    case "ADD_TASK":
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload],
+        error: false,
+      };
+    case "VALIDATE_TASK":
+      return {
+        ...state,
+        error: true,
+      };
+    case "DELETE_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload),
+      };
     default:
       return state;
   }

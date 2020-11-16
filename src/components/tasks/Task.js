@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import taskContext from "../../context/tasks/taskContext";
 
 const Task = ({ task }) => {
+  // Global state for tasks
+  const { deleteTask, getTasks } = useContext(taskContext);
+
+  // Function to handle task deletion
+  const handleDelete = () => {
+    deleteTask(task.id); // delete the task from the state
+    getTasks(task.projectId); // get updated task list
+  };
+
   return (
     <li className="tarea sombra">
       <p>{task.name}</p>
@@ -19,7 +29,11 @@ const Task = ({ task }) => {
         <button type="button" className="btn btn-primario">
           Edit
         </button>
-        <button type="button" className="btn btn-secundario">
+        <button
+          type="button"
+          className="btn btn-secundario"
+          onClick={handleDelete}
+        >
           Delete{" "}
         </button>
       </div>
