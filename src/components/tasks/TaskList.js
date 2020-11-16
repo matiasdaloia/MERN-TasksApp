@@ -11,12 +11,7 @@ const TaskList = () => {
 
   const [project] = activeproject;
 
-  const tasks = [
-    { name: "Choose Platform", completed: true },
-    { name: "Add Peperoncino", completed: false },
-    { name: "Cook Bacon", completed: true },
-    { name: "Grocery Shopping", completed: false },
-  ];
+  const tasks = [];
 
   return (
     <Fragment>
