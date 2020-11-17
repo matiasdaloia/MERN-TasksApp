@@ -31,9 +31,8 @@ const TaskForm = () => {
 
   const handleChange = (e) => {
     setTask({
-      name: e.target.value,
-      completed: false,
-      projectId: activeproject[0].id,
+      ...task,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -53,7 +52,7 @@ const TaskForm = () => {
     } else {
       // Edit task
       editTask(task);
-      console.log(task);
+      // console.log(task);
     }
 
     // Get updated tasks
