@@ -11,6 +11,7 @@ const TaskList = () => {
   // Get global state for tasks
 
   const { projectTasks } = useContext(taskContext);
+  console.log(projectTasks);
 
   // Validate if there is no selected project
   if (!activeproject) return <h2>Please Select a Project</h2>;

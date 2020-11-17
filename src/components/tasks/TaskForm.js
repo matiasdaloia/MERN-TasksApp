@@ -33,6 +33,7 @@ const TaskForm = () => {
     setTask({
       ...task,
       [e.target.name]: e.target.value,
+      projectId: activeproject[0].id,
     });
   };
 
@@ -48,6 +49,7 @@ const TaskForm = () => {
     // Check if it is editing or creating new task
     if (selectedtask === null) {
       // Add task to global state
+      console.log(task);
       addTask(task);
     } else {
       // Edit task
@@ -57,6 +59,7 @@ const TaskForm = () => {
 
     // Get updated tasks
     getTasks(activeproject[0].id);
+    console.log(activeproject[0]);
 
     // Restart the form
     setTask({
