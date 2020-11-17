@@ -25,6 +25,26 @@ export default (state, action) => {
         ...state,
         tasks: state.tasks.filter((task) => task.id !== action.payload),
       };
+    case "EDIT_TASK":
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.id ? action.payload : task
+        ),
+        selectedtask: null,
+      };
+    case "CHANGE_TASK_STATE":
+      return {
+        ...state,
+        tasks: state.tasks.map((task) =>
+          task.id === action.payload.id ? action.payload : task
+        ),
+      };
+    case "SELECT_TASK":
+      return {
+        ...state,
+        selectedtask: action.payload,
+      };
     default:
       return state;
   }

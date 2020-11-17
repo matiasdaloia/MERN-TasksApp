@@ -1,7 +1,6 @@
 import React, { useReducer } from "react";
 import TaskContext from "./taskContext";
 import taskReducer from "./taskReducer";
-import { v4 as uuidv4 } from "uuid";
 
 const TaskState = (props) => {
   const initialState = {
@@ -25,6 +24,7 @@ const TaskState = (props) => {
     ],
     projectTasks: null,
     error: false,
+    selectedtask: null,
   };
 
   const [state, dispatch] = useReducer(taskReducer, initialState);
@@ -60,16 +60,44 @@ const TaskState = (props) => {
     });
   };
 
+  // Function to change task state from completed to incomplete and visceversa
+  const changeTaskState = (task) => {
+    dispatch({
+      type: "CHANGE_TASK_STATE",
+      payload: task,
+    });
+  };
+
+  // Function to select the clicked task
+  const selectActualTask = (task) => {
+    dispatch({
+      type: "SELECT_TASK",
+      payload: task,
+    });
+  };
+
+  // Function to edit the current selected task
+  const editTask = (task) => {
+    dispatch({
+      type: "EDIT_TASK",
+      payload: task,
+    });
+  };
+
   return (
     <TaskContext.Provider
       value={{
         tasks: state.tasks,
         projectTasks: state.projectTasks,
         error: state.error,
+        selectedtask: state.selectedtask,
         getTasks,
         addTask,
         validateTask,
         deleteTask,
+        changeTaskState,
+        selectActualTask,
+        editTask,
       }}
     >
       {props.children}

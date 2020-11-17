@@ -1,15 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import projectContext from "../../context/projects/projectContext";
 import taskContext from "../../context/tasks/taskContext";
 
 const TaskForm = () => {
   const { activeproject } = useContext(projectContext);
-  const { error, addTask, getTasks, validateTask } = useContext(taskContext);
+  const {
+    selectedtask,
+    error,
+    addTask,
+    getTasks,
+    validateTask,
+    editTask,
+  } = useContext(taskContext);
 
   // task state
   const [task, setTask] = useState({
     name: "",
   });
+
+  // Effect that detects if there is a selected task
+  useEffect(() => {
+    if (selectedtask !== null) {
+      setTask(selectedtask);
+    } else {
+      setTask({
+        name: "",
+      });
+    }
+  }, [selectedtask]);
 
   const handleChange = (e) => {
     setTask({
@@ -28,8 +46,15 @@ const TaskForm = () => {
       return;
     }
 
-    // Add task to global state
-    addTask(task);
+    // Check if it is editing or creating new task
+    if (selectedtask === null) {
+      // Add task to global state
+      addTask(task);
+    } else {
+      // Edit task
+      editTask(task);
+      console.log(task);
+    }
 
     // Get updated tasks
     getTasks(activeproject[0].id);
@@ -50,7 +75,7 @@ const TaskForm = () => {
             name="name"
             className="input-text"
             type="text"
-            placeholder="Task Name..."
+            placeholder={selectedtask ? "New Task Name" : "Task Name..."}
             value={task.name}
             onChange={(e) => handleChange(e)}
           />
@@ -59,7 +84,7 @@ const TaskForm = () => {
           <input
             className="btn btn-primario btn-submit btn-block"
             type="submit"
-            value="Add Task"
+            value={selectedtask ? "Edit Task" : "Add Task"}
           />
         </div>
       </form>
