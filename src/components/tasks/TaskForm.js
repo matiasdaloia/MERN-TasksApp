@@ -49,17 +49,14 @@ const TaskForm = () => {
     // Check if it is editing or creating new task
     if (selectedtask === null) {
       // Add task to global state
-      console.log(task);
       addTask(task);
     } else {
       // Edit task
       editTask(task);
-      // console.log(task);
     }
 
     // Get updated tasks
     getTasks(activeproject[0].id);
-    console.log(activeproject[0]);
 
     // Restart the form
     setTask({
